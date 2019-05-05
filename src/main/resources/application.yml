@@ -1,0 +1,28 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: gateway-service-zull
+
+#这里的配置表示，访问/it/** 直接重定向到http://www.ityouknow.com/**
+#zuul:
+#  routes:
+#      path: /service-provider1/a
+#      serviceId: service-provider1
+#    provide2-service:
+#      path: /service-provider2/**
+#      serviceId: service-provider2
+#    provide3-service:
+#      path: /service-provider3/**
+#      serviceId: service-provider3
+
+
+#Eureka配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://139.196.94.253:8761/eureka/
+  instance:
+    #写定IP
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    prefer-ip-address: true
