@@ -2,17 +2,20 @@ server:
   port: 80
 spring:
   application:
-    name: gateway-service-zull
+    name: zull-gateway-service
 
 # 配置网关反向代理，例如访问/api-member/** 直接重定向到member-service服务,实现路由转发，隐藏服务的真实ip(服务都实在内网中)
-zuul:
- routes:
-   api-a:
-     path: /api-member/**
-     serviceId: member-service
-   api-b:
-     path: /api-order/**
-     serviceId: order-service
+#zull根据服务名，去Eureka获取服务真实地址，并通过本地转发，而且默认开启Ribbon实现负载均衡
+#默认读取Eureka注册列表 默认30秒间隔
+#zuul:
+# routes:
+#   api-a:
+#     path: /api-member/**
+#     #服务名
+#     serviceId: member-service
+#   api-b:
+#     path: /api-order/**
+#     serviceId: order-service
 
 
 #Eureka配置

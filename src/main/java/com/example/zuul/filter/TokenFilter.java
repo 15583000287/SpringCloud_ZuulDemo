@@ -62,19 +62,22 @@ public class TokenFilter extends ZuulFilter {
         // 获取上下文
         RequestContext currentContext = RequestContext.getCurrentContext();
         HttpServletRequest request = currentContext.getRequest();
+        //获取userToken
         String userToken = request.getParameter("userToken");
         System.out.println("userToken: "+userToken);
         if (StringUtils.isEmpty(userToken)) {
+            //不会继续执行调用服务接口，网关直接响应给客户端
             currentContext.setSendZuulResponse(false);
             currentContext.setResponseStatusCode(401);
             currentContext.setResponseBody("userToken is Null");
-        }
-        if(!userToken.equals("10010")){
+            return null;
+        }else if(!userToken.equals("10010")){
             currentContext.setSendZuulResponse(false);
             currentContext.setResponseStatusCode(401);
             currentContext.setResponseBody("userToken is Error");
+            return null;
         }
-        // 否则正常执行业务逻辑.....
+        // 否则正常执行业务逻辑，调用服务.....
         return null;
 
     }
