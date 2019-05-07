@@ -1,5 +1,5 @@
 server:
-  port: 80
+  port: 8080
 spring:
   application:
     name: gateway-service-zull
@@ -19,7 +19,7 @@ zuul:
 eureka:
   client:
     service-url:
-      defaultZone: http://139.196.94.253:8761/eureka/
+      defaultZone: http:// 172.19.182.141:8761/eureka/
   instance:
     #写定IP
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
